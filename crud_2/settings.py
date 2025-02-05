@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crud_2_app',
     'crispy_forms',
-    'crispy_bootstrap5'
+    'crispy_bootstrap5',
+    'django_filters',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -86,7 +87,7 @@ WSGI_APPLICATION = 'crud_2.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "customer_db",
+        "NAME": "ecommerce_db",
         "USER": "postgres",
         "PASSWORD": "1234",
         "HOST": "127.0.0.1",
@@ -137,3 +138,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]
 AUTH_USER_MODEL = "crud_2_app.Login"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

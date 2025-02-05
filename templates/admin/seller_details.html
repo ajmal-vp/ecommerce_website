@@ -1,0 +1,44 @@
+
+
+{% extends 'admin/admin_base.html' %}
+
+{% block content %}
+
+
+        <table class="table table-hover table-dark ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+        <th scope="col">GST Number</th>
+        <th scope="col">Product Category</th>
+
+<!--      <th scope="col">Delete</th>-->
+      <th scope="col">Edit</th>
+    </tr>
+  </thead>
+  <tbody>
+
+        {% for seller in data %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{seller.name}}</td>
+        <td>{{seller.address}}</td>
+      <td>{{seller.phone_no}}</td>
+        <td>{{seller.Gst_no}}</td>
+        <td>{{seller.product_category}}</td>
+
+ <td>
+
+        <a class="btn btn-primary" href="{% url 'update_seller' seller.id %}" role="button">Edit</a>
+      </td>
+    </tr>
+
+
+
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

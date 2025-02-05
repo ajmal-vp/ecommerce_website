@@ -1,0 +1,66 @@
+{% extends 'customer/customer_base.html' %}
+
+{% block content %}
+<div class="container">
+ <form method="POST">
+                {% csrf_token %}
+     {% for product in data %}
+    <h2 class="text-center">Order Summary</h2>
+    <table class="table table-bordered">
+        <tr>
+            <th colspan="2" class="text-center bg-primary text-white">Customer Details</th>
+        </tr>
+        <tr>
+            <td><strong>Name:</strong></td>
+            <td>{{ product.customer.name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Email:</strong></td>
+            <td>{{ product.customer.email }}</td>
+        </tr>
+        <tr>
+            <td><strong>Phone:</strong></td>
+            <td>{{ product.customer.phone }}</td>
+        </tr>
+        <tr>
+            <td><strong>Address:</strong></td>
+            <td>{{ product.customer.address }}</td>
+        </tr>
+    </table>
+
+    <table class="table table-bordered">
+        <tr>
+            <th colspan="2" class="text-center bg-success text-white">Product Details</th>
+        </tr>
+        <tr>
+            <td><strong>Product Name:</strong></td>
+            <td>{{ product.product.name }}</td>
+        </tr>
+        <tr>
+            <td><strong>Brand:</strong></td>
+            <td>{{ product.product.brand }}</td>
+        </tr>
+        <tr>
+            <td><strong>Quantity:</strong></td>
+            <td>{{product.count }}</td>
+        </tr>
+        <tr>
+            <td><strong>Price Per Unit:</strong></td>
+            <td>₹{{ product.product.product_price }}</td>
+        </tr>
+        <tr>
+            <td><strong>Total Price:</strong></td>
+            <td>₹{{ product.product.product_price }}</td>
+        </tr>
+    </table>
+
+    <div class="text-center">
+
+        <a href="{% url 'view_product' %}" class="btn btn-danger">Cancel</a>
+        <a href="{% url 'pay_now' product.id %}" class="btn btn-danger">Pay Now</a>
+        {% endfor %}
+    </div>
+ </form>
+</div>
+
+{% endblock %}

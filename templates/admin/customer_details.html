@@ -1,0 +1,46 @@
+
+
+{% extends 'admin/admin_base.html' %}
+
+{% block content %}
+
+
+        <table class="table table-hover table-dark ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+
+      <th scope="col">Delete</th>
+<!--      <th scope="col">Edit</th>-->
+    </tr>
+  </thead>
+  <tbody>
+
+        {% for customer in data %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{customer.name}}</td>
+        <td>{{customer.email}}</td>
+        <td>{{customer.address}}</td>
+      <td>{{customer.phone_no}}</td>
+
+ <td>
+
+        {% if customer.id %}
+            <a href="{% url 'delete_customer' customer.id %}" class="btn btn-danger">Delete</a>
+        {% else %}
+            <span>Invalid ID</span>
+        {% endif %}
+      </td>
+    </tr>
+
+
+
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

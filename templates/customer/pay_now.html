@@ -1,0 +1,16 @@
+
+{% extends 'customer/customer_base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <h2 class="text-center">Enter Payment Details</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Pay Now</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

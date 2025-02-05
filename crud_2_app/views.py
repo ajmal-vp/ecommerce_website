@@ -11,12 +11,12 @@ def home(request):
     return render(request, 'index.html')
 
 def admin_dashboard(request):
-    return render(request, 'admin/admin_dashboard.html')
+    return render(request, 'admin/admin_base.html')
 
 def seller_dashboard(request):
-    return render(request, 'seller/seller_dashboard.html')
+    return render(request, 'seller/seller_base.html')
 def customer_dashboard(request):
-    return render(request, 'customer/customer_dashboard.html')
+    return render(request, 'customer/customer_base.html')
 
 
 
@@ -50,7 +50,6 @@ def customer_add(request):
             customer = login_form1.save(commit=False)
             customer.is_customer = True
             customer.save()
-
             user = customer_form.save(commit=False)
             user.customer_data = customer
             user.save()
@@ -83,8 +82,10 @@ def seller_add(request):
 
 def login_views(request):
     if request.method == 'POST':
-        username = request.POST.get('uname')
-        password = request.POST.get('pass')
+        username = request.POST.get('username')
+        print(username)
+        password = request.POST.get('password1')
+        print(password)
         user = authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
@@ -93,7 +94,7 @@ def login_views(request):
             elif user.is_customer:
                 return redirect('customer_dashboard')
             elif user.is_seller:
-                return redirect('seller_dashboard')
+                return redirect('product_upload')
         else:
             messages.info(request,'Invalid Credentials')
     return render(request,"login.html")

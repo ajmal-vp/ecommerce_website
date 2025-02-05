@@ -2,7 +2,7 @@
 from django import forms
 from django.contrib.auth.backends import BaseBackend
 
-from crud_2_app.models import Login, Customer, Seller
+from crud_2_app.models import Login, Customer, Seller, product, pay_now
 
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -28,5 +28,21 @@ class Seller_login(forms.ModelForm):
     class Meta:
         model = Seller
         fields = ("name","address","phone_no","Gst_no","product_category")
+
+class product_form(forms.ModelForm):
+    class Meta:
+        model = product
+        fields = '__all__'
+        exclude = ('product_user',)
+
+class pay_now_form(forms.ModelForm):
+    class Meta:
+        model = pay_now
+        fields ='__all__'
+        exclude = ('buy',)
+
+
+
+
 
 

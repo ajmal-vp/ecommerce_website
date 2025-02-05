@@ -1,0 +1,63 @@
+{% extends 'customer/customer_base.html' %}
+
+
+
+
+<!--{{data}}-->
+
+
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+
+            <div class="col-md-4 mb-4">
+                <form method="POST">
+                {% csrf_token %}
+
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ data.product_image.url }}" class="card-img-top" alt="product image" style="width:300px; height:350px;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ data.name }}</h4>
+                        <h6 class="card-title">{{ data.brand }}</h6>
+                        <p class="card-text">Quantity:{{ data.quantity }}</p>
+                        <p class="card-text">{{ data.product_description }}</p>
+                        <p class="card-text">{{ data.product_price }}</p>
+
+                         <label for="quantity">Select Quantity:</label>
+            <input type="number" id="quantity" name="count" value="1" min="1" max="{{ data.quantity }}" class="form-control mb-2" style="width: 100px;">
+                    </div>
+                        <a href="{% url 'order_summary' data.id %}" class="card-link btn btn-primary" role="button" type="submit">Continue</a><br><br>
+
+
+                    </div>
+                </div>
+            </div>
+        </form>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                </div>
+                <div class="row">
+            {% endif %}
+
+    </div>
+</div>
+<script>
+    function increaseQuantity() {
+        let input = document.getElementById('quantityInput');
+        let max = parseInt(input.getAttribute('max'));
+        let value = parseInt(input.value);
+        if (value < max) {
+            input.value = value + 1;
+        }
+    }
+
+    function decreaseQuantity() {
+        let input = document.getElementById('quantityInput');
+        let value = parseInt(input.value);
+        if (value > 1) {
+            input.value = value - 1;
+        }
+    }
+</script>
+{% endblock %}

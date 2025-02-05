@@ -1,0 +1,51 @@
+{% extends 'customer/customer_base.html' %}
+
+
+
+
+<!--{{data}}-->
+
+<div class="container">
+    <form method="get" class="form-inline search-form">
+        <div class="d-none d-md-flex ms-4">
+            {{ brand_filter.form }}
+            <br>
+            <button class="btn btn-primary mr-2" type="submit">Search</button>
+        </div>
+    </form>
+</div>
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for product in data %}
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{{ product.product_data.product_image.url }}" class="card-img-top" alt="product image" style="width:300px; height:350px;">
+                    <div class="card-body">
+                        <h4 class="card-title">{{ product.product_data.name }}</h4>
+                        <h6 class="card-title">{{ product.product_data.brand }}</h6>
+                        <p class="card-text">{{ product.product_data.quantity }}</p>
+                        <p class="card-text">{{ product.product_data.product_description }}</p>
+                        <p class="card-text">{{ product.product_data.product_price }}</p>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'buy_product_cart' product.id %}" class="card-link btn btn-primary" role="button">BUY NOW</a><br><br>
+
+                         <a href="{% url 'delete_cart' product.id %}" class="btn btn-danger">REMOVE</a>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            {% if forloop.counter|divisibleby:3 and not forloop.last %}
+                </div>
+                <div class="row">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
